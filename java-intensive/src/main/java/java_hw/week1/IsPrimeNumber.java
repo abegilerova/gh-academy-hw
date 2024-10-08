@@ -1,8 +1,6 @@
-package org.example;
+package java_hw.week1;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class IsPrimeNumber {
     public static boolean isPrime (int number){
         if (number <= 1){
             return false;
