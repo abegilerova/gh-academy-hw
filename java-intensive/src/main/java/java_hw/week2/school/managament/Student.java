@@ -13,7 +13,7 @@ public class Student extends Person {
         return tuition;
     }
 
-    public void setTuition(double tuition) {
+    public void setTuition() {
         this.tuition = enrolledCourses.size() * 500;
     }
 
@@ -30,5 +30,9 @@ public class Student extends Person {
 
     public void enrollCourses(String enrolledCourse){
         this.enrolledCourses.add(enrolledCourse);
+    }
+
+    public int getStudentID(){
+        return studentID;
     }
 }
