@@ -15,5 +15,10 @@ public class Person {
         System.out.println("Age " + age);
     }
 
+    public int getAge(){
+        return age;
+    }
+
+
 
 }
