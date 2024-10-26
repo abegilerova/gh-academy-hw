@@ -15,15 +15,15 @@ public class CourseRegistration {
         students = new ArrayList<>();
     }
 
-    public void registerStudent(Student student){
-        try {
-            students.add(student);
+    public void registerStudent(Student student) throws CourseFullException {
             if(students.size() >5 ){
                 throw new CourseFullException("Cannot add more than 5 students ");
             }
-        } catch (CourseFullException e){
-            System.err.println(e.getMessage());
-        }
 
+            students.add(student);
+    }
+
+    public int getStudentsSize(){
+        return students.size();
     }
 }
