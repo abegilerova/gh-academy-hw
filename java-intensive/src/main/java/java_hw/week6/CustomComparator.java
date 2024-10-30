@@ -8,27 +8,38 @@ public class CustomComparator {
 
     }
 
-    public static <T> void partition (List<T>list, int low, int high, Comparator<T> comparator){
-        int lastIndex = list.size() - 1;
-        int pivotIndex = (list.size()/2)-1;
+    public static <T> void partition(List<T> list, int low, int high, Comparator<T> comparator) {
+
+        int pivotIndex = (high + low) / 2;
         T pivotElement = list.get(pivotIndex);
-        T lastElement = list.get(lastIndex);
 
-        list.set(lastIndex, pivotElement);
-        list.set(pivotIndex, lastElement);
+        swap(list, pivotIndex, high);
 
-        int leftIndex = 0;
-        while(true){
+        int leftIndex = low;
+        int rightIndex = high - 1;
+
+        while (leftIndex < rightIndex) {
             boolean leftValueIsLessThanPivot = comparator.compare(list.get(leftIndex), pivotElement) < 0;
-            if (leftValueIsLessThanPivot){
+            if (leftValueIsLessThanPivot) {
                 leftIndex += 1;
-                System.out.println("incremented left " + leftIndex);
             }
 
-            break;
+            boolean rightValueIsLargerThanPivot = comparator.compare(list.get(rightIndex), pivotElement) > 0;
+            if (rightValueIsLargerThanPivot) {
+                rightIndex -= 1;
+            }
+
+            if (!leftValueIsLessThanPivot && !rightValueIsLargerThanPivot) {
+                swap(list, leftIndex, rightIndex);
+            }
         }
 
+        swap(list, pivotIndex, high);
+    }
 
-
+    public static <T> void swap(List<T> list, int a, int b) {
+        T elementA = list.get(a);
+        list.set(a, list.get(b));
+        list.set(b, elementA);
     }
 }

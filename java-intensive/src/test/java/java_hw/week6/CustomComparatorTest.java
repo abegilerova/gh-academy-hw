@@ -25,9 +25,9 @@ class CustomComparatorTest {
 
     @Test
     public void partition() {
-        List<Integer> intList = new ArrayList<>(Arrays.asList(2,1,5,3,8,7,1,0));
-        CustomComparator.partition(intList, 0, intList.size()-1,Comparator.naturalOrder());
-        assertEquals(List.of(2,1,0,3,8,7,6,5), intList);
+        List<Integer> intList = new ArrayList<>(Arrays.asList(2, 6, 5, 3, 8, 7, 1, 0));
+        CustomComparator.partition(intList, 0, intList.size() - 1, Comparator.naturalOrder());
+        assertEquals(List.of(2, 1, 0, 3, 8, 7, 6, 5), intList);
 
     }
 
