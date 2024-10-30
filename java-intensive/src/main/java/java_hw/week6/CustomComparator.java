@@ -8,7 +8,7 @@ public class CustomComparator {
 
     }
 
-    public static <T> void partition(List<T> list, int low, int high, Comparator<T> comparator) {
+    public static <T> int partition(List<T> list, int low, int high, Comparator<T> comparator) {
 
         int pivotIndex = (high + low) / 2;
         T pivotElement = list.get(pivotIndex);
@@ -34,7 +34,9 @@ public class CustomComparator {
             }
         }
 
-        swap(list, pivotIndex, high);
+        swap(list, leftIndex, high);
+
+        return leftIndex;
     }
 
     public static <T> void swap(List<T> list, int a, int b) {
