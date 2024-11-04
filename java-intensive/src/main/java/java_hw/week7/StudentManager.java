@@ -1,6 +1,7 @@
 package java_hw.week7;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,4 +53,24 @@ public class StudentManager {
                     ", Grade: " + student.getGrade());
         }
    }
+
+    public void updateGrade(int id, double newGrade, String filePath) throws IOException {
+        List<Student> students = readAndLoadStudents();
+        boolean found = false;
+        for (Student student : students){
+           if (student.getId() == id){
+               student.setGrade(newGrade);
+               found = true;
+               break;
+           }
+        }
+
+        if(found){
+            saveStudentsToFile(students);
+            System.out.println("Students are updated successfully.");
+        } else{
+            System.out.println("Student with ID " + id + " not found.");
+        }
+
+    }
 }
