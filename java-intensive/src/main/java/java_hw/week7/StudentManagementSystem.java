@@ -14,7 +14,7 @@ public class StudentManagementSystem {
             System.out.println("1. Add Student");
             System.out.println("2. Display Students");
             System.out.println("3. Update Student");
-            System.out.println("5. Exit");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -37,6 +37,13 @@ public class StudentManagementSystem {
 
                     case 2:
                         studentManager.displayStudents();
+                        break;
+                    case 3:
+                        System.out.print("Enter ID of student to update: ");
+                        id = scanner.nextInt();
+                        System.out.print("Enter new grade: ");
+                        grade = scanner.nextDouble();
+                        studentManager.updateGrade(id, grade );
                         break;
                 }
             }catch(IOException e){

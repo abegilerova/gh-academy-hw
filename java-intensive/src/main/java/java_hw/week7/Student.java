@@ -37,7 +37,7 @@ public class Student {
 
     @Override
     public String toString(){
-        return "Id is " + id + ", Name is " + name + ", Grade is " + grade;
+        return id + "," + name + "," + grade;
     }
 
     public static Student fromString (String data) {

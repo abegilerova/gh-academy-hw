@@ -54,7 +54,7 @@ public class StudentManager {
         }
    }
 
-    public void updateGrade(int id, double newGrade, String filePath) throws IOException {
+    public void updateGrade(int id, double newGrade) throws IOException {
         List<Student> students = readAndLoadStudents();
         boolean found = false;
         for (Student student : students){
