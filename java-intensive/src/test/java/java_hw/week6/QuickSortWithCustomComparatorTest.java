@@ -48,5 +48,10 @@ class QuickSortWithCustomComparatorTest {
         QuickSortWithCustomComparator.sort(intList, Comparator.naturalOrder());
         assertEquals(List.of(0,1,2,3,5,6,7,8), intList);
     }
-
+    @Test
+    public void partition3() {
+        List<Integer> intList = new ArrayList<>(Arrays.asList(2, 3, 5, 0, 1, 6));
+        int pivotLocation = QuickSortWithCustomComparator.partition(intList, 0, intList.size() - 1, Comparator.naturalOrder());
+        assertEquals(List.of(2, 3, 1, 0, 5, 6), intList);
+    }
 }
