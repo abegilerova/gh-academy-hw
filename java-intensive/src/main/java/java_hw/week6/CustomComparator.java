@@ -4,8 +4,19 @@ import java.util.Comparator;
 import java.util.List;
 
 public class CustomComparator {
-    public static <T> void sort(List<T> list, Comparator<T> comparator) {
+    public static <T> void sort(List<T> list, Comparator<T> comparator){
+        sort(list, 0, list.size() - 1, comparator);
 
+    }
+
+    public static <T> void sort(List<T> list, int low, int high, Comparator<T> comparator) {
+        if(low < high){
+            String pre = "pre  " + list.subList(low, high + 1);
+            int pivotLocation = partition(list, low, high, comparator);
+            System.out.printf("%s%npost %s%npivot %s%n", pre, list.subList(low, high + 1), list.get(pivotLocation));
+            sort(list, low, pivotLocation, comparator);
+            sort(list, pivotLocation + 1, high, comparator);
+        }
     }
 
     public static <T> int partition(List<T> list, int low, int high, Comparator<T> comparator) {
