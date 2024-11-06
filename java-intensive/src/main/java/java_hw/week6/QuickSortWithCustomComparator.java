@@ -3,7 +3,7 @@ package java_hw.week6;
 import java.util.Comparator;
 import java.util.List;
 
-public class CustomComparator {
+public class QuickSortWithCustomComparator {
     public static <T> void sort(List<T> list, Comparator<T> comparator){
         sort(list, 0, list.size() - 1, comparator);
 
