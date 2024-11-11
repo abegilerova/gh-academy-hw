@@ -10,7 +10,7 @@ public class Students {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        Students studentsApp = new Students();
+
 
         try {
             conn = DriverManager.getConnection(URL);
