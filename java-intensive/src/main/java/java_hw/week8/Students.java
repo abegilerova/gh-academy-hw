@@ -41,10 +41,10 @@ public class Students {
                 System.out.println("ID is " + id);
                 System.out.println("Name is " + name);
                 System.out.println("Age is " + age);
-                System.out.println("Grade is ");
+                System.out.println("Grade is " + grade);
             }
 
-            String updateSQL = "UDPATE students SET grade = 8.7 WHERE id = 1";
+            String updateSQL = "UPDATE students SET grade = 8.7 WHERE id = 1";
             stmt.executeUpdate(updateSQL);
 
             //close resources
