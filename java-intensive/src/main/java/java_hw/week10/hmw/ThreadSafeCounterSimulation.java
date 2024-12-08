@@ -4,28 +4,24 @@ public class ThreadSafeCounterSimulation {
     public static void main (String [] args){
         ThreadSafeCounter counter = new ThreadSafeCounter();
 
-        Runnable addCounter = () -> {
+        Thread incrementThread = new Thread(() -> {
             for (int i = 0; i < 1000; i++){
                 counter.increment();
             }
-        };
+        });
 
-        Runnable decrementCounter = () -> {
+        Thread decrementThread = new Thread(() -> {
             for (int i = 0; i < 1000; i++){
                 counter.decrement();
             }
-        };
+        });
 
-        Thread t1 = new Thread(addCounter);
-        Thread t2 = new Thread(decrementCounter);
-
-
-        t1.start();
-        t2.start();
+        incrementThread.start();
+        decrementThread.start();
 
         try {
-            t1.join();
-            t2.join();
+            incrementThread.join();
+            decrementThread.join();
         }catch(InterruptedException e){
             Thread.currentThread().interrupt();
             System.out.println("Thread is interrupted.");
