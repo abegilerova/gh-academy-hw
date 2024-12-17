@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/gh-academy-hw.iml" filepath="$PROJECT_DIR$/.idea/gh-academy-hw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/discrete_math_algorithms/week1/week1.iml" filepath="$PROJECT_DIR$/discrete_math_algorithms/week1/week1.iml" />
     </modules>
   </component>
 </project>

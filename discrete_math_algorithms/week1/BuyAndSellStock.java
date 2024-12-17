@@ -1,37 +1,25 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
-class Solution {
+class BuyAndSellStock {
     public static int maxProfit(int[] prices) {
-//        List<Integer> pricesList = Arrays.stream(prices).boxed().collect(Collectors.toList());
-//        int min = Arrays.stream(prices).min().getAsInt();
-//        int minIndex = pricesList.indexOf(min);
-//        if(minIndex == pricesList.size()-1){
-//            return 0;
-//        }
-//        List <Integer> newPricesList = pricesList.subList(minIndex + 1, pricesList.size()-1);
-//        int maxNumber = (int) Collections.max(newPricesList);
-//        System.out.println("maxNumber - min " + (maxNumber - min));
-//        return maxNumber - min;
-        int lowest_price_so_far = prices[0];
-        int highest_profit = 0;
+        int minPrice = Integer.MAX_VALUE;
+        int highestProfit = 0;
 
-        for (int p : prices){
-            int profit = (p - lowest_price_so_far);
+        for (int price : prices){
+            if(price < minPrice){
+                minPrice = price;
+            }
 
-            highest_profit = Math.max(highest_profit, profit);
-            lowest_price_so_far = Math.min(lowest_price_so_far, p);
+            int profit = price - minPrice;
+            if(profit > highestProfit){
+                highestProfit = profit;
+            }
         }
-
-        return highest_profit;
-
+        System.out.println(highestProfit);
+        return highestProfit;
     }
 
     public static void main(String[] args) {
-        int[] numbers = {7,6,4,3,1};
+        int[] numbers = {7,1,5,3,6,4};
         maxProfit(numbers);
     }
 }

@@ -45,7 +45,7 @@ public class Book {
         this.author = author;
     }
 
-    public boolean checkOut(){
+    public synchronized boolean checkOut(){
         if (isAvailable){
             isAvailable = false;
             System.out.println("Book checked out: " + title);
@@ -54,7 +54,7 @@ public class Book {
         return false;
     }
 
-    public void returnBook(){
+    public synchronized void returnBook(){
         isAvailable = true;
         System.out.println("Book was returned: " + title);
     }
