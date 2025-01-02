@@ -1,11 +1,10 @@
 package java_hw.week11;
 
-import java.sql.SQLOutput;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class BookManagementSystem {
@@ -36,6 +35,11 @@ public class BookManagementSystem {
             System.out.println(range + ":");
             bookList.forEach(System.out::println);
         });
+
+        Optional<Book> bookWithLongestTitle = longestTitleBook(booksData);
+
+        System.out.println("longest title");
+        bookWithLongestTitle.ifPresent(System.out::println);
 
     }
     public static List<Book> filterBooksByRatings(List<Book> books, Predicate<Book> condition){
@@ -68,5 +72,13 @@ public class BookManagementSystem {
             else if(book.price<=50) return "$20-$50";
             else  return ">$50";
         }));
+    }
+
+    public static Optional<Book> longestTitleBook (List<Book>books){
+        return books.stream().max(Comparator.comparing(book->book.getTitle().length()));
+    }
+
+    public static Map<String, Long> authorBookCount (List<Book>books){
+        return books.stream().collect(Collectors.groupingBy(book ->book.author, Collectors.counting()));
     }
 }
