@@ -41,6 +41,8 @@ public class BookManagementSystem {
         System.out.println("longest title");
         bookWithLongestTitle.ifPresent(System.out::println);
 
+        System.out.println(ratingGreaterThan3(booksData));
+
     }
     public static List<Book> filterBooksByRatings(List<Book> books, Predicate<Book> condition){
         return books.stream().filter(condition).collect(Collectors.toList());
@@ -80,5 +82,9 @@ public class BookManagementSystem {
 
     public static Map<String, Long> authorBookCount (List<Book>books){
         return books.stream().collect(Collectors.groupingBy(book ->book.author, Collectors.counting()));
+    }
+
+    public static Boolean ratingGreaterThan3 (List<Book>books){
+        return books.stream().allMatch(book -> book.rating > 3.0);
     }
 }
