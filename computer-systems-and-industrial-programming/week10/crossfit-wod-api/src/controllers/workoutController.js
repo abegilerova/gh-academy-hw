@@ -1,4 +1,3 @@
-// In src/controllers/workoutController.js
 const workoutService = require("../services/workoutService");
 
 const getAllWorkouts = (req, res) => {
@@ -122,5 +121,5 @@ module.exports = {
   createNewWorkout,
   updateOneWorkout,
   deleteOneWorkout,
-  getRecordsForWorkout,
+ 
 };
