@@ -6,7 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-static class ClientHandler implements Runnable {
+import static java_hw.finalProject.ChatServer.broadcast;
+import static java_hw.finalProject.ChatServer.removeClient;
+
+class ClientHandler implements Runnable {
     private final Socket socket;
     private PrintWriter out;
     private String username;
@@ -23,14 +26,36 @@ static class ClientHandler implements Runnable {
             this.out = out;
             out.println("Welcome to the chat! Please enter your username:");
             username = reader.readLine();
-            DatabaseConnection.saveUer(username);
-
+            DatabaseConnection.saveUser(username);
+            broadcast(username + " has joined the chat.", this);
+            String message;
+            while ((message = reader.readLine()) != null){
+                if(message.equalsIgnoreCase("exit")){
+                    break;
+                }
+                String formattedMessage = username + ": " + message;
+                DatabaseConnection.saveMessage(username, message);
+                System.out.println(formattedMessage);
+                broadcast(formattedMessage, this);
+            }
         }catch (IOException e){
             System.out.println("Error handling client: " + e.getMessage());
 
+        }finally {
+            try{
+                socket.close();
+            }catch(IOException e){
+                System.out.println("Error closing socket: " + e.getMessage());
+            }
+            removeClient(this);
+            broadcast(username + " has left the chat", this);
 
         }
 
+    }
+
+    void sendMessage(String message){
+        out.println(message);
     }
 
 }

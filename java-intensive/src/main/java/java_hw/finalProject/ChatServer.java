@@ -28,4 +28,16 @@ public class ChatServer {
             System.out.println("Error starting server on PORT: " + PORT);
         }
         }
+
+        static void broadcast(String message, ClientHandler sender){
+            for (ClientHandler client : clients){
+                if(client != sender){
+                    client.sendMessage(message);
+                }
+            }
+        }
+
+        static void removeClient (ClientHandler client){
+            clients.remove(client);
+        }
     }
