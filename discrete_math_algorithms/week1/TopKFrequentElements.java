@@ -16,15 +16,21 @@ public class TopKFrequentElements {
 
         System.out.println(minHeap);
         for (int num : freqMap.keySet()){
-            System.out.println(num);
+            //System.out.println(num);
             minHeap.offer(num);
+//            System.out.println(minHeap);
             if (minHeap.size() > k){
                 minHeap.poll();
             }
-
         }
 
-       System.out.println(minHeap);
+        System.out.println(minHeap);
+
+        for(int i =0; i < k; i ++){
+            finalResult[i] = minHeap.poll();
+        }
+
+       System.out.println(Arrays.toString(finalResult));
 
         return finalResult;
     }
