@@ -1,3 +1,5 @@
+package hashMap;
+
 import java.util.*;
 
 public class GroupAnagrams {
