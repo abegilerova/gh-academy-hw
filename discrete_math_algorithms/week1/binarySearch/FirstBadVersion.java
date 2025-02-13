@@ -4,23 +4,27 @@ public class FirstBadVersion {
     private static int firstBad;
 
     public static boolean isBadVersion(int version){
-        return firstBad >= version;
+
+        return version >= firstBad;
     }
 
     public  static int firstBadVersion(int n) {
-
         int left = 1;
         int right = n;
+        int ans = n;
 
-        while (left < right){
-            int middle = (right + left )/2;
+        while (left <= right){
+            int middle = left + (right - left) / 2;
             if(isBadVersion(middle)){
-                right = middle;
+                ans = middle;
+                right = middle-1;
             } else {
-                left = middle + 1;
+                left  = middle + 1;
+
             }
         }
-        return left;
+
+        return ans;
     }
 
 
