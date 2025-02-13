@@ -1,4 +1,5 @@
-import java.awt.desktop.PreferencesEvent;
+package arraysI;
+
 import java.util.Arrays;
 
 public class RotateArray {

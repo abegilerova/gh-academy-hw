@@ -1,3 +1,5 @@
+package arraysI;
+
 import java.util.Arrays;
 
 class NumArray {

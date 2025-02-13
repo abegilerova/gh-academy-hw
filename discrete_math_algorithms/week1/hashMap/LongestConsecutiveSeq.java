@@ -5,35 +5,31 @@ import java.util.*;
 public class LongestConsecutiveSeq {
     public static int longestConsecutive(int[] nums) {
 
-        Set<Integer> numSet = new HashSet<>();
-        for (int num : nums){
-            numSet.add(num);
-        }
+       Set<Integer> numSet = new HashSet<>();
 
-        int longest = 0;
+       for(int num : nums){
+           numSet.add(num);
+       }
 
-        for (int num : numSet){
-//            System.out.println("num " + num);
-            if(!numSet.contains(num -1)){
-                int currentNum = num;
-                int currentStreak = 1;
+       int longest = 0;
 
-                System.out.println("currentNum " + currentNum);
+       for (int num : numSet){
 
-                while(numSet.contains(currentNum + 1)){
-                    currentNum++;
-                    currentStreak++;
+           if(!numSet.contains(num-1)) {
+               int currentNum = num;
+               int currentStreak = 1;
 
-                }
+               while (numSet.contains(currentNum + 1)) {
+                   currentStreak++;
+                   currentNum++;
+               }
 
-                System.out.println("currentStreak " + currentStreak);
-                longest = Math.max(longest, currentStreak);
-                System.out.println(longest);
-            }
-        }
+               longest = Math.max(longest, currentStreak);
+           }
+       }
 
-//        System.out.println(longest);
-        return longest;
+        System.out.println(longest);
+       return longest;
     }
 
     public static void main(String[] args) {

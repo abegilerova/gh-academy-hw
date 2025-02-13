@@ -1,4 +1,4 @@
-import java.util.Arrays;
+package arraysI;
 
 public class MergeTwoSortedArrays {
     public  static void merge(int[] nums1, int m, int[] nums2, int n) {
