@@ -1,22 +1,41 @@
 package twoPointers;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public class StringCompression {
     public static int compress(char[] chars) {
+      int read = 0;
+      int write = 0;
 
-        Map<Character, Integer> mappedChar = new HashMap<>();
+      while (read < chars.length){
 
-        for (int i = 0; i < chars.length; i++){
-            if(chars[i] == 'a' ){
+          char currentChar = chars[read];
+          int count= 0;
 
-            }
-        }
+          while (read < chars.length && chars[read] == currentChar ){
+              read++;
+              count++;
+          }
+
+          chars[write] = currentChar;
+          write++;
+
+          System.out.println(Integer.toString(count).toCharArray());
+          if (count > 1) {
+              for (char digit : Integer.toString(count).toCharArray()) {
+                  chars[write] = digit;
+                  write++;
+              }
+          }
+      }
+
+        //System.out.println(Arrays.toString(chars));
+      return write  ;
+
     }
 
     public static void main(String[] args) {
         char [] chars = {'a','a','b','b','c','c','c'};
-        compress(chars);
+        System.out.println(compress(chars));
     }
 }
