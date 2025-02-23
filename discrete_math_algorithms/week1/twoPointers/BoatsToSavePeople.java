@@ -9,23 +9,21 @@ public class BoatsToSavePeople {
         //bucket sort and count sort
         int[] count = new int [30001];
 
-        for (int x : people){
-            System.out.println(x);
-            count[x]++;
-        }
+       for (int x : people){
+           count[x]++;
+       }
 
         System.out.println(Arrays.toString(count));
 
-        for(int x = 0, i = 0; x <= 30000; x++){
-            while(count[x] > 0){
-                people[i] = x;
-                count[x]--;
-                i++;
-            }
-        }
+       for (int i = 0, j = 0; i < people.length; i++){
+           while(count[i] > 0){
+               people[j] = i;
+               count[i]--;
+               j++;
+           }
+       }
 
-        System.out.println(Arrays.toString(people));
-
+       System.out.println(Arrays.toString(people));
 
         int left = 0;
         int right = people.length - 1;
@@ -52,7 +50,7 @@ public class BoatsToSavePeople {
     }
 
     public static void main(String[] args) {
-        int [] people = {2,2,2,1};
+        int [] people = {2,2,3,4,5,2,1};
         int limit = 3;
 
         numRescueBoats(people,limit);
