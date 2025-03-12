@@ -9,11 +9,25 @@ public class Permutations {
 
         List<List<Integer>> result = new ArrayList<>();
 
-        if(nums.length == 1){
-            Arrays.asList(nums);
-        }
+        backtrack(nums,0, new ArrayList<>(), result );
+
+        System.out.println(result);
 
         return result;
+
+    }
+
+    public static void backtrack(int [] nums, int start, List<Integer> combination,  List<List<Integer>> result){
+        if(combination.size() == nums.length){
+            result.add(combination);
+            return;
+        }
+
+        for (int i = start; i < nums.length; i++){
+            combination.add(nums[i]);
+            backtrack(nums, start + 1, combination, result);
+            combination.remove(combination.size()-1);
+        }
 
     }
 
