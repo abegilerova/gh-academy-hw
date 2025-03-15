@@ -30,6 +30,7 @@ public class Permutations {
                 continue;  // Skip used elements
             }
 
+            System.out.println("value of used at index " + i + " is " + used[i] );
             // Print the decision to include the current element
             System.out.println("Choosing " + nums[i] + " at index " + i);
 
@@ -41,8 +42,8 @@ public class Permutations {
 
             // After backtracking, print the state of the combination
             System.out.println("Backtracking, removing " + nums[i] + " from combination");
-
             combination.remove(combination.size() - 1);  // Remove the last element (backtrack)
+            System.out.println("Combination  after removing " + nums[i] + " looks like " + combination);
             used[i] = false;  // Mark this element as unused for the next round
         }
     }
