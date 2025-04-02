@@ -1,10 +1,10 @@
 package singlyDoublyLinkedList;
 
-class ListNode {
+class ListNode1 {
       int val;
-      ListNode next;
+      ListNode1 next;
 
-      ListNode(int val) {
+      ListNode1(int val) {
           this.val = val;
           this.next = null;
       }
@@ -12,14 +12,14 @@ class ListNode {
 
 public class ReverseLinkedList {
 
-    public static ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode current = head;
+    public static ListNode1 reverseList(ListNode1 head) {
+        ListNode1 prev = null;
+        ListNode1 current = head;
         System.out.println("Original List:");
         printList(head);
 
         while(current != null){
-            ListNode nextNode = current.next;
+            ListNode1 nextNode = current.next;
             current.next = prev;
             prev = current;
             current = nextNode;
@@ -33,7 +33,7 @@ public class ReverseLinkedList {
 
     }
 
-    public static void printList(ListNode head){
+    public static void printList(ListNode1 head){
         while (head != null){
             System.out.println(head.val + "->");
             head = head.next;
@@ -44,13 +44,13 @@ public class ReverseLinkedList {
     }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(2);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(4);
-        head.next.next.next.next = new ListNode(5);
+        ListNode1 head = new ListNode1(1);
+        head.next = new ListNode1(2);
+        head.next.next = new ListNode1(3);
+        head.next.next.next = new ListNode1(4);
+        head.next.next.next.next = new ListNode1(5);
 
-        ListNode reversedHead = reverseList(head);
+        ListNode1 reversedHead = reverseList(head);
         System.out.println("Reversed List:");
         printList(reversedHead);
 
