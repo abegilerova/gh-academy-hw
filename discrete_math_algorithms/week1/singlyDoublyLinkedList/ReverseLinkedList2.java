@@ -21,6 +21,7 @@ public class ReverseLinkedList2 {
         dummy.next = head;
         ListNode2 prev = dummy;
         //place prev before left
+        return dummy;
     }
 
     public static void printList(ListNode2 head){
