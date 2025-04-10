@@ -5,7 +5,7 @@ package org.example;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-      String rawInput = "x = 5 + 3";
+      String rawInput = "x = 5 + 3 if";
       Lexer lexer = new Lexer(rawInput);
 
       Lexer.Token token;

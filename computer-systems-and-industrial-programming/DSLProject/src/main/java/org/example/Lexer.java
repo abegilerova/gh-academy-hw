@@ -1,8 +1,13 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 //raw input to list of tokens
 public class Lexer {
     private final char EOF_CHAR = '\0';
+    private static final Set<String> KEYWORDS = new HashSet<>(Arrays.asList("if"));
     private final String input;
     private int position;
     private char currentChar;
@@ -51,7 +56,9 @@ public class Lexer {
             builder.append(currentChar);
             advance();
         }
-        return new Token(TokenType.IDENTIFIER, builder.toString());
+        String value = builder.toString();
+        return KEYWORDS.contains(value) ? new Token(TokenType.IF, value ):
+                new Token(TokenType.IDENTIFIER, value);
     }
 
     private Token readNumber(){
@@ -91,7 +98,7 @@ public class Lexer {
     }
 
     public enum TokenType {
-        NUMBER, IDENTIFIER, PLUS, EOF, ASSIGHNMENT,SEPARATOR
+        NUMBER, IDENTIFIER, PLUS, EOF, ASSIGHNMENT, SEPARATOR, IF
     }
 
 }
