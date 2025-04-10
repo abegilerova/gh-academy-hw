@@ -15,7 +15,63 @@ public class Lexer {
     }
 
     public Token nextToken(){
-        return null;
+        while(currentChar != EOF_CHAR){
+            if(Character.isWhitespace(currentChar)){
+                skipWhiteSpace();
+                continue;
+            }
+            if(Character.isDigit(currentChar)){
+                return readNumber();
+            }
+
+            if(Character.isLetter(currentChar)){
+                return readIdentifier();
+            }
+
+            switch (currentChar){
+                case '=':
+                    advance();
+                    return  new Token(TokenType.ASSIGHNMENT, "=");
+                case '+':
+                    advance();
+                    return  new Token(TokenType.PLUS, "+");
+                case ';':
+                    advance();
+                    return  new Token(TokenType.SEPARATOR, ";");
+                default:
+                    throw new LexerException("Unexpected character:  " + currentChar);
+            }
+        }
+        return new Token(TokenType.EOF, "");
+    }
+
+    private Token readIdentifier(){
+        StringBuilder builder = new StringBuilder();
+        while(Character.isLetterOrDigit(currentChar)){
+            builder.append(currentChar);
+            advance();
+        }
+        return new Token(TokenType.IDENTIFIER, builder.toString());
+    }
+
+    private Token readNumber(){
+        StringBuilder builder = new StringBuilder();
+        while(Character.isDigit(currentChar)){
+            builder.append(currentChar);
+            advance();
+        }
+        return new Token(TokenType.NUMBER, builder.toString());
+    }
+
+    private void skipWhiteSpace(){
+        while(Character.isWhitespace(currentChar)){
+            advance();
+        }
+    }
+
+    private void advance(){
+        position++;
+        currentChar = position < input.length() ? input.charAt(position) : EOF_CHAR;
     }
 
     public static class Token {
@@ -35,7 +91,7 @@ public class Lexer {
     }
 
     public enum TokenType {
-        NUMBER, IDENTIFIER, PLUS, EOF
+        NUMBER, IDENTIFIER, PLUS, EOF, ASSIGHNMENT,SEPARATOR
     }
 
 }
