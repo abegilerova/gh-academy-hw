@@ -5,8 +5,8 @@ import org.example.Lexer;
 import java.util.List;
 
 public class Parser {
-public static List<Lexer.Token> listOfTokens;
-static int currentIndex ;
+private  List<Lexer.Token> listOfTokens;
+private  int currentIndex ;
 
 public Parser(){
 this.listOfTokens = List.of(
@@ -22,29 +22,30 @@ this.currentIndex = 0;
 }
 
 public boolean parseAndValidate(){
-    Lexer.Token currentToken = peek();
-    if(currentToken.tokenType != Lexer.TokenType.IDENTIFIER && currentIndex != 0){
-        return false;
-    } else if (currentToken.tokenType != Lexer.TokenType.ASSIGHNMENT && currentIndex != 1){
-        return false;
-    } else if(currentToken.tokenType.toString() != "NUMBER" && currentIndex != 2){
-        return false;
-    }  else if(currentToken.tokenType.toString() != "PLUS" && currentIndex != 3){
-        return false;
-    }  else if(currentToken.tokenType.toString() != "NUMBER" && currentIndex != 4){
-        return false;
-    }
 
+    if (peek().tokenType != Lexer.TokenType.IDENTIFIER) return false;
     advance();
 
-    return true;
+    if (peek().tokenType != Lexer.TokenType.ASSIGHNMENT) return false;
+    advance();
+
+    if (peek().tokenType != Lexer.TokenType.NUMBER) return false;
+    advance();
+
+    if (peek().tokenType != Lexer.TokenType.PLUS) return false;
+    advance();
+
+    if (peek().tokenType != Lexer.TokenType.NUMBER) return false;
+    advance();
+
+    return peek().tokenType == Lexer.TokenType.EOF;
 }
 
-public static void advance(){
+public void advance(){
     currentIndex++;
 }
 
-public static Lexer.Token peek(){
+public Lexer.Token peek(){
     return listOfTokens.get(currentIndex);
 
 }
