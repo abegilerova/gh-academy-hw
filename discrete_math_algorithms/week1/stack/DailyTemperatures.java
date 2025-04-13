@@ -11,7 +11,10 @@ public class DailyTemperatures {
 
         for (int i = 0; i < temperatures.length; i++){
             while(!days.isEmpty() && temperatures[i]> temperatures[days.peek()]){
+                System.out.println("i + " + i);
+                System.out.println("peek " + days.peek());
                 int prevIndex = days.pop();
+                System.out.println("prevIndex "+ prevIndex);
                 result[prevIndex] = i - prevIndex;
             }
 
