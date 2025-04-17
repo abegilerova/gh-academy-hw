@@ -18,26 +18,36 @@ public class Parser {
     }
 
     public ASTNode parse (){
-        ASTNode node = parseFactor();
-        return parseTerm();
+        return parseExpression();
+    }
+
+    public ASTNode parseExpression(){
+        ASTNode leftTerm = parseTerm();
+
+        if(currentToken.tokenType == Lexer.TokenType.PLUS ||
+        currentToken.tokenType == Lexer.TokenType.MINUS){
+            Lexer.TokenType op = currentToken.tokenType;
+            consume(currentToken.tokenType);
+
+            return new BinaryOpNode(op, leftTerm, parseExpression());
+        }
+
+        return leftTerm;
     }
 
     public ASTNode parseTerm(){
-        ASTNode node = parseFactor();
-        if(currentToken.tokenType == Lexer.TokenType.EOF){
-            return node;
-        }
+        ASTNode leftNode = parseFactor();
+
 
         if(currentToken.tokenType == Lexer.TokenType.MUL ||
         currentToken.tokenType == Lexer.TokenType.DIV){
             Lexer.TokenType op = currentToken.tokenType;
             consume(currentToken.tokenType);
 
-            ASTNode rightNode = parseTerm();
-            return new BinaryOpNode(op, node, rightNode);
+            return new BinaryOpNode(op, leftNode, parseTerm());
         }
 
-        return null;
+        return leftNode;
     }
 
     public ASTNode parseFactor(){
