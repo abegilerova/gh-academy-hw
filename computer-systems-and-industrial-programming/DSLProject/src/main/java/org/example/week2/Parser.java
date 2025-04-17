@@ -1,53 +1,95 @@
 package org.example.week2;
-
 import org.example.Lexer;
-
 import java.util.List;
 
+/*
+<expression> ::= <term> | <term> "+" <expression> | <term> "-" <expression>
+<term> ::= <factor> | <factor> "*" <term> | <factor> "/" <term>
+<factor> ::= <number> | "(" <expression> ")"
+ */
+
 public class Parser {
-private  List<Lexer.Token> listOfTokens;
-private  int currentIndex ;
+    private final Lexer lexer;
+    private Lexer.Token currentToken;
 
-public Parser(){
-this.listOfTokens = List.of(
-        new Lexer.Token(Lexer.TokenType.IDENTIFIER, "x"),
-        new Lexer.Token(Lexer.TokenType.ASSIGHNMENT, "="),
-        new Lexer.Token(Lexer.TokenType.NUMBER, "5"),
-        new Lexer.Token(Lexer.TokenType.PLUS, "+"),
-        new Lexer.Token(Lexer.TokenType.NUMBER, "3"),
-        new Lexer.Token(Lexer.TokenType.EOF, "")
-);
+    public Parser(Lexer lexer){
+        this.lexer = lexer;
+        this.currentToken = lexer.nextToken();
+    }
 
-this.currentIndex = 0;
-}
+    public ASTNode parse (){
+        ASTNode node = parseFactor();
+        return parseTerm();
+    }
 
-public boolean parseAndValidate(){
+    public ASTNode parseTerm(){
+        ASTNode node = parseFactor();
+        if(currentToken.tokenType == Lexer.TokenType.EOF){
+            return node;
+        }
 
-    if (peek().tokenType != Lexer.TokenType.IDENTIFIER) return false;
-    advance();
+        if(currentToken.tokenType == Lexer.TokenType.MUL ||
+        currentToken.tokenType == Lexer.TokenType.DIV){
+            Lexer.TokenType op = currentToken.tokenType;
+            consume(currentToken.tokenType);
 
-    if (peek().tokenType != Lexer.TokenType.ASSIGHNMENT) return false;
-    advance();
+            ASTNode rightNode = parseTerm();
+            return new BinaryOpNode(op, node, rightNode);
+        }
 
-    if (peek().tokenType != Lexer.TokenType.NUMBER) return false;
-    advance();
+        return null;
+    }
 
-    if (peek().tokenType != Lexer.TokenType.PLUS) return false;
-    advance();
+    public ASTNode parseFactor(){
+        if(currentToken.tokenType == Lexer.TokenType.NUMBER){
+            consume(Lexer.TokenType.NUMBER);
+            return new NumberNode(currentToken.value);
+        }
 
-    if (peek().tokenType != Lexer.TokenType.NUMBER) return false;
-    advance();
+        if(currentToken.tokenType == Lexer.TokenType.IDENTIFIER){
+            consume(Lexer.TokenType.IDENTIFIER);
+            return new IdentifierNode(currentToken.value);
+        }
+        throw new ParserException("Unexpected Token Type: " + currentToken.tokenType.name());
+    }
 
-    return peek().tokenType == Lexer.TokenType.EOF;
-}
+    private void consume(Lexer.TokenType tokenType){
+        if(currentToken.tokenType == tokenType){
+            currentToken = lexer.nextToken();
+        }else {
+            throw new ParserException("Unexpected Token Type: " + currentToken.tokenType.name());
+        }
+    }
 
-public void advance(){
-    currentIndex++;
-}
+    static class ASTNode {}
 
-public Lexer.Token peek(){
-    return listOfTokens.get(currentIndex);
+    static class BinaryOpNode extends  ASTNode {
+        final Lexer.TokenType op;
+        final  ASTNode left;
+        final  ASTNode right;
 
-}
+        BinaryOpNode (Lexer.TokenType op, ASTNode left, ASTNode right){
+            this.op = op;
+            this.left = left;
+            this.right = right;
+        }
 
+    }
+
+    static class IdentifierNode extends ASTNode {
+        final String value;
+
+        IdentifierNode(String value){
+            this.value = value;
+        }
+
+    }
+
+    static class NumberNode extends  ASTNode {
+        final String value;
+
+        NumberNode(String value ){
+            this.value = value;
+        }
+    }
 }

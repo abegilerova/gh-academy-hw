@@ -98,7 +98,7 @@ public class Lexer {
     }
 
     public enum TokenType {
-        NUMBER, IDENTIFIER, PLUS, EOF, ASSIGHNMENT, SEPARATOR, IF
+        NUMBER, IDENTIFIER, PLUS, EOF, ASSIGHNMENT, SEPARATOR, IF, MUL, DIV
     }
 
 }
