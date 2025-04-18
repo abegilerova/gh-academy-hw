@@ -52,13 +52,15 @@ public class Parser {
 
     public ASTNode parseFactor(){
         if(currentToken.tokenType == Lexer.TokenType.NUMBER){
+            String value = currentToken.value;
             consume(Lexer.TokenType.NUMBER);
-            return new NumberNode(currentToken.value);
+            return new NumberNode(value);
         }
 
         if(currentToken.tokenType == Lexer.TokenType.IDENTIFIER){
+            String value = currentToken.value;
             consume(Lexer.TokenType.IDENTIFIER);
-            return new IdentifierNode(currentToken.value);
+            return new IdentifierNode(value);
         }
         throw new ParserException("Unexpected Token Type: " + currentToken.tokenType.name());
     }
@@ -71,7 +73,7 @@ public class Parser {
         }
     }
 
-    static class ASTNode {}
+    public static class ASTNode {}
 
     static class BinaryOpNode extends  ASTNode {
         final Lexer.TokenType op;
@@ -100,6 +102,23 @@ public class Parser {
 
         NumberNode(String value ){
             this.value = value;
+        }
+    }
+
+    public static void printAST(Parser.ASTNode node, int indent) {
+        String indentStr = "  ".repeat(indent);
+
+        if (node instanceof Parser.NumberNode) {
+            System.out.println(indentStr + "Number: " + ((Parser.NumberNode) node).value);
+        } else if (node instanceof Parser.IdentifierNode) {
+            System.out.println(indentStr + "Identifier: " + ((Parser.IdentifierNode) node).value);
+        } else if (node instanceof Parser.BinaryOpNode) {
+            Parser.BinaryOpNode bin = (Parser.BinaryOpNode) node;
+            System.out.println(indentStr + "BinaryOp: " + bin.op);
+            printAST(bin.left, indent + 1);
+            printAST(bin.right, indent + 1);
+        } else {
+            System.out.println(indentStr + "Unknown node");
         }
     }
 }
