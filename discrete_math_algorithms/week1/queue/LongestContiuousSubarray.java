@@ -1,40 +1,35 @@
 package queue;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class LongestContiuousSubarray {
     public static int longestSubarray(int[] nums, int limit) {
+        Deque<Integer> maxDeque = new LinkedList<>();
+        Deque<Integer> minDeque = new LinkedList<>();
 
-        int maxValue = 0;
+        int left = 0;
+        int maxLength = 0;
 
-        for (int i = 0; i < nums.length; i++){
-            for(int j = i; j < nums.length; j++) {
-                ArrayList<Integer> subArr = new ArrayList<>();
-                for (int k = i; k <= j; k++) {
-                    subArr.add(nums[k]);
-                }
-
-                System.out.println(subArr);
-                boolean isValid = true;
-                for (int z = 0; z < subArr.size(); z++) {
-                    for (int x = z + 1; x < subArr.size(); x++) {
-                        int diff = Math.abs(subArr.get(z) - subArr.get(x));
-                        if (diff > limit) {
-                            isValid = false;
-                            break;
-                        }
-                    }
-
-                    if (!isValid) break;
-                }
-
-                if(isValid){
-                    maxValue = Math.max(maxValue, subArr.size());
-                }
+        for (int right = 0; right < nums.length; right++){
+            // Maintain decreasing maxDeque
+            while (!maxDeque.isEmpty() && nums[right] > maxDeque.peekLast()) {
+                maxDeque.pollLast();
             }
+            maxDeque.addLast(nums[right]);
+            // Maintain increasing minDeque
+            while (!minDeque.isEmpty() && nums[right] < minDeque.peekLast()) {
+                minDeque.pollLast();
+            }
+            minDeque.addLast(nums[right]);
         }
-        System.out.println("maxValue: " + maxValue);
-        return maxValue;
+
+        System.out.println(maxDeque);
+        System.out.println(minDeque);
+
+        return -1;
+
     }
 
     public static void main(String[] args) {
