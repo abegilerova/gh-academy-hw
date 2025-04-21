@@ -43,6 +43,9 @@ public class Lexer {
                 case ';':
                     advance();
                     return  new Token(TokenType.SEPARATOR, ";");
+                case '*':
+                    advance();
+                    return new Token(TokenType.MUL, "*");
                 default:
                     throw new LexerException("Unexpected character:  " + currentChar);
             }
