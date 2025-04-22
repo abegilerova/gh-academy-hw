@@ -106,6 +106,7 @@ public class Parser {
     }
 
     public static void printAST(Parser.ASTNode node, int indent) {
+        System.out.println("method is called ");
         String indentStr = "  ".repeat(indent);
 
         if (node instanceof Parser.NumberNode) {
