@@ -13,7 +13,7 @@ public class ObjectWriter {
             outObject.writeObject(aika);
             System.out.println("Object written to person.ser");
 
-        }catch (IOException e){
+            }catch (IOException e){
             e.printStackTrace();
 
         }
