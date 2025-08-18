@@ -3,20 +3,20 @@ package binaryTrees;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class TreeNode {
+class TreeNode2 {
      int val;
-     TreeNode left;
-     TreeNode right;
-     TreeNode() {}
-     TreeNode(int val) { this.val = val; }
-     TreeNode(int val, TreeNode left, TreeNode right) {
+     TreeNode2 left;
+     TreeNode2 right;
+     TreeNode2() {}
+     TreeNode2(int val) { this.val = val; }
+     TreeNode2(int val, TreeNode2 left, TreeNode2 right) {
           this.val = val;
           this.left = left;
           this.right = right;
       }
   }
 public class MaximumDepthOfBinaryTree {
-    public  static int maxDepth(TreeNode root) {
+    public  static int maxDepth(TreeNode2 root) {
         if(root == null){
             return 0;
         }
@@ -59,7 +59,7 @@ public class MaximumDepthOfBinaryTree {
 
     }
 
-    public static void printTree (TreeNode root){
+    public static void printTree (TreeNode2 root){
         if(root == null){
             return;
         }
@@ -72,11 +72,11 @@ public class MaximumDepthOfBinaryTree {
 
     public static void main(String[] args) {
         //root = [3,9,20,null,null,15,7]
-       TreeNode root = new TreeNode(3);
-       root.left = new TreeNode(9);
-       root.right = new TreeNode(20);
-       root.right.left = new TreeNode(15);
-       root.right.right = new TreeNode(7);
+       TreeNode2 root = new TreeNode2(3);
+       root.left = new TreeNode2(9);
+       root.right = new TreeNode2(20);
+       root.right.left = new TreeNode2(15);
+       root.right.right = new TreeNode2(7);
        int result = maxDepth(root);
        System.out.println("result " + result);
 
